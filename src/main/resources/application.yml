@@ -1,0 +1,24 @@
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - beans
+  endpoint:
+    beans:
+      enabled: true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/student_management
+    username: postgres
+    password: Welcome
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+    hibernate:
+      ddl-auto: none
+      show-sql: true
