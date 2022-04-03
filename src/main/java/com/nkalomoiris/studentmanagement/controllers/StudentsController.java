@@ -11,9 +11,11 @@ import java.util.List;
 @RequestMapping("/api/v1/students")
 public class StudentsController {
 
+    // TODO How to initialize the db
     @Autowired
     StudentRepository studentRepository;
 
+    // TODO use dto and dao
     @GetMapping
     public List<Student> getAll() {
         return studentRepository.findAll();
@@ -25,6 +27,7 @@ public class StudentsController {
         return studentRepository.getById(student_id);
     }
 
+    // TODO use this method for update too
     @PostMapping
     public Student create(@RequestBody Student student) {
         return studentRepository.save(student);
