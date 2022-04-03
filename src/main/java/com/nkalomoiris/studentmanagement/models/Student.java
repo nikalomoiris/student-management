@@ -9,20 +9,22 @@ import java.util.Date;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Student {
 
+    // TODO follow naming convention
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long student_id;
     private String student_first_name;
     private String student_last_name;
-    private Integer student_age;
-    private Integer student_level;
-    private Date student_creation_date;
+    // TODO add a unique field e.g. A.M.
+    private Integer student_age; // TODO add business like validation like (min, max, nullable)
+    private Integer student_level; // TODO could be enum or separate entity
+    private Date student_creation_date; // TODO check spring's feature to manage creation and update dates (auditing)
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
 
     public Student() {
-        this.student_creation_date = new java.util.Date();
+        this.student_creation_date = new java.util.Date(); // TODO this will be removed when spring's auditing is utilized
     }
 
     public Date getStudent_creation_date() {
