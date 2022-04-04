@@ -11,7 +11,6 @@ import java.util.List;
 @RequestMapping("/api/v1/students")
 public class StudentsController {
 
-    // TODO How to initialize the db
     @Autowired
     StudentRepository studentRepository;
 

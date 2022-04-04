@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8083
 
 auth0:
   audience: https://dev-rkd-2v9z.us.auth0.com/api/v2/
@@ -27,7 +27,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL82Dialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       show-sql: true
   security:
     oauth2:
