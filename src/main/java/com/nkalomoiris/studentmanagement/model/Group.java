@@ -1,4 +1,4 @@
-package com.nkalomoiris.studentmanagement.models;
+package com.nkalomoiris.studentmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,8 +12,12 @@ public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long group_id;
-    private String group_name;
+    @Column(name = "group_id")
+    private Long id;
+
+    @Column(name = "group_name")
+    private String Name;
+
     @OneToMany(mappedBy = "group")
     @JsonIgnore
     private List<Student> students;
@@ -29,20 +33,20 @@ public class Group {
         this.students = students;
     }
 
-    public Long getGroup_id() {
-        return group_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setGroup_id(Long group_id) {
-        this.group_id = group_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getGroup_name() {
-        return group_name;
+    public String getName() {
+        return Name;
     }
 
-    public void setGroup_name(String group_name) {
-        this.group_name = group_name;
+    public void setName(String name) {
+        this.Name = name;
     }
 
 //    public List<Student> getStudents() {

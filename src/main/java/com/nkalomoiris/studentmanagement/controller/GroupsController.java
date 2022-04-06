@@ -1,8 +1,8 @@
-package com.nkalomoiris.studentmanagement.controllers;
+package com.nkalomoiris.studentmanagement.controller;
 
-import com.nkalomoiris.studentmanagement.models.Group;
-import com.nkalomoiris.studentmanagement.models.Student;
-import com.nkalomoiris.studentmanagement.repositories.GroupRepository;
+import com.nkalomoiris.studentmanagement.model.Group;
+import com.nkalomoiris.studentmanagement.model.Student;
+import com.nkalomoiris.studentmanagement.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
