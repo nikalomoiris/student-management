@@ -1,10 +1,6 @@
 server:
   port: 8083
 
-auth0:
-  audience: https://dev-rkd-2v9z.us.auth0.com/api/v2/
-  domain: dev-rkd-2v9z.us.auth0.com
-
 logging:
   level:
     root: info
@@ -29,8 +25,4 @@ spring:
     hibernate:
       ddl-auto: update
       show-sql: true
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://${auth0.domain}/
+
