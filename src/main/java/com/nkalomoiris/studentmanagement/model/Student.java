@@ -1,12 +1,20 @@
 package com.nkalomoiris.studentmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity(name = "students")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@AllArgsConstructor
+@Getter
+@Setter
 public class Student {
 
     @Id
@@ -14,16 +22,27 @@ public class Student {
     @Column(name = "student_id")
     private Long id;
 
-    @Column(name = "student_first_name")
+    @Column(name = "student_first_name", nullable = false)
+    @NotNull(message = "First name is mandatory")
     private String firstName;
 
-    @Column(name = "student_last_name")
+    @Column(name = "student_last_name", nullable = false)
+    @NotNull(message = "Last name is mandatory")
     private String lastName;
 
-    // TODO add a unique field e.g. A.M.
+    @Column(name = "student_ssn", unique = true, nullable = false)
+    @NotNull(message = "SSN is mandatory")
+    @Size(min = 10, max = 10)
+    private String ssn;
 
     @Column(name = "student_age")
-    private Integer studentAge; // TODO add business like validation like (min, max, nullable)
+    @Min(5)
+    @Max(100)
+    private Integer studentAge;
+
+    @Column(name = "student_email")
+    @Email
+    private String email;
 
     @Column(name = "student_level")
     private Integer studentLevel; // TODO could be enum or separate entity
@@ -39,59 +58,4 @@ public class Student {
         this.creationDate = new java.util.Date(); // TODO this will be removed when spring's auditing is utilized
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Integer getStudentAge() {
-        return studentAge;
-    }
-
-    public void setStudentAge(Integer studentAge) {
-        this.studentAge = studentAge;
-    }
-
-    public Integer getStudentLevel() {
-        return studentLevel;
-    }
-
-    public void setStudentLevel(Integer studentLevel) {
-        this.studentLevel = studentLevel;
-    }
 }
