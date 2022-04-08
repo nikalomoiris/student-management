@@ -1,6 +1,6 @@
 package com.nkalomoiris.studentmanagement.controller;
 
-import com.nkalomoiris.studentmanagement.dto.StudentDto;
+import com.nkalomoiris.studentmanagement.dto.student.StudentDto;
 import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +45,8 @@ public class StudentsController {
 
     // TODO use this method for update too
     @PostMapping
-    public Student create(@RequestBody Student student) {
-        return studentRepository.save(student);
+    public StudentDto create(@RequestBody Student student) {
+        return convert(studentRepository.save(student));
     }
 
     @RequestMapping(value = "{student_id}", method = RequestMethod.DELETE)

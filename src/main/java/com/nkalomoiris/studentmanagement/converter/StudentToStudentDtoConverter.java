@@ -1,11 +1,9 @@
 package com.nkalomoiris.studentmanagement.converter;
 
-import com.nkalomoiris.studentmanagement.dto.StudentDto;
+import com.nkalomoiris.studentmanagement.dto.student.StudentDto;
 import com.nkalomoiris.studentmanagement.model.Group;
 import com.nkalomoiris.studentmanagement.model.Student;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 
 @Component

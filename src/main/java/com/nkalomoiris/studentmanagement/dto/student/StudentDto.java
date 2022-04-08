@@ -1,4 +1,4 @@
-package com.nkalomoiris.studentmanagement.dto;
+package com.nkalomoiris.studentmanagement.dto.student;
 
 import com.nkalomoiris.studentmanagement.model.Group;
 
@@ -8,12 +8,6 @@ import java.util.Date;
 public class StudentDto extends AbstractStudentDto implements Serializable {
 
     private final Long id;
-
-    private final Group group; // TODO replace Group with the dto when ready
-
-    private final Integer studentAge;
-
-    private final Integer studentLevel;
 
     private final Date creationDate;
 
@@ -31,18 +25,6 @@ public class StudentDto extends AbstractStudentDto implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public Integer getStudentAge() {
-        return studentAge;
-    }
-
-    public Integer getStudentLevel() {
-        return studentLevel;
     }
 
     public Date getCreationDate() {

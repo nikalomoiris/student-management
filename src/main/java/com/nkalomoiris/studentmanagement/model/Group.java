@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "groups")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
