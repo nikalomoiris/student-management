@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Student {
+public class Student extends AbstractUpdatable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 @Component
 public class GroupToGroupDtoConverter implements Converter<Group, GroupDto> {
 
+    // TODO Ask Michali why the commented part below breaks the code
 //    private final ConversionService conversionService;
 //
 //    @Autowired
