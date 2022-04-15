@@ -1,5 +1,7 @@
 package com.nkalomoiris.studentmanagement.dto.student;
 
+import com.nkalomoiris.studentmanagement.dao.GroupDao;
+import com.nkalomoiris.studentmanagement.dto.group.GroupDto;
 import com.nkalomoiris.studentmanagement.model.Group;
 
 import java.io.Serializable;
@@ -11,7 +13,7 @@ public class StudentDto extends AbstractStudentDto implements Serializable {
 
     private final Date creationDate;
 
-    public StudentDto(String firstName, String lastName, String email, Long id, Group group, Integer studentAge, Integer studentLevel,
+    public StudentDto(String firstName, String lastName, String email, Long id, GroupDto group, Integer studentAge, Integer studentLevel,
                       Date creationDate) {
         this.id = id;
         this.firstName = firstName;

@@ -1,9 +1,8 @@
 package com.nkalomoiris.studentmanagement.controller;
 
+import com.nkalomoiris.studentmanagement.dao.GroupDao;
 import com.nkalomoiris.studentmanagement.dto.group.GroupDto;
-import com.nkalomoiris.studentmanagement.dto.student.StudentDto;
 import com.nkalomoiris.studentmanagement.model.Group;
-import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -16,20 +15,20 @@ import java.util.List;
 @RequestMapping("/api/v1/groups")
 public class GroupsController {
 
-    private final GroupRepository groupRepository;
+    private final GroupDao groupDao;
 
     private final ConversionService conversionService;
 
     @Autowired
-    public GroupsController(GroupRepository groupRepository, ConversionService conversionService) {
-        this.groupRepository = groupRepository;
+    public GroupsController(GroupRepository groupRepository, GroupDao groupDao, ConversionService conversionService) {
+        this.groupDao = groupDao;
         this.conversionService = conversionService;
     }
 
     @GetMapping
     public List<GroupDto> getAll() {
 
-        List<Group> groups = groupRepository.findAll();
+        List<Group> groups = groupDao.findAll();
 
         List<GroupDto> results = new ArrayList<>(groups.size());
 
@@ -41,23 +40,17 @@ public class GroupsController {
     @GetMapping
     @RequestMapping("{group_id}")
     public GroupDto getById(@PathVariable Long group_id) {
-        return convert(groupRepository.getById(group_id));
+        return convert(groupDao.getById(group_id));
     }
 
     @PostMapping
     public GroupDto create(@RequestBody Group group) {
-        return convert(groupRepository.save(group));
-    }
-
-    @GetMapping
-    @RequestMapping("/student-list/{group_id}")
-    public List<Student> studentList(@PathVariable Long group_id) {
-        return groupRepository.getById(group_id).getStudents();
+        return convert(groupDao.save(group));
     }
 
     @RequestMapping(value = "{group_id}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable Long group_id) {
-        groupRepository.deleteById(group_id);
+        groupDao.deleteById(group_id);
     }
 
     private GroupDto convert(Group group) {

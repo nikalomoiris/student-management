@@ -25,7 +25,6 @@ public class StudentsController {
         this.conversionService = conversionService;
     }
 
-    // TODO use dto and dao for requests and responds
     @GetMapping
     public List<StudentDto> getAll() {
 

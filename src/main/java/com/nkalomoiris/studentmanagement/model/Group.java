@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Group {
+public class Group extends AbstractUpdatable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
