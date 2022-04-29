@@ -22,7 +22,6 @@ public class StudentToStudentResponseDtoConverter implements Converter<Student, 
         var studentsGroupResponseDto = new StudentsGroupDto(source.getGroup().getId(), source.getGroup().getName());
 
         return new StudentResponseDto(source.getFirstName(), source.getLastName(), source.getEmail(),
-                source.getId(), studentsGroupResponseDto, source.getStudentAge(), source.getStudentLevel(),
-                source.getCreationDate());
+                source.getId(), studentsGroupResponseDto, source.getStudentAge(), source.getStudentLevel());
     }
 }
