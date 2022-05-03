@@ -42,7 +42,7 @@ public class Student extends AbstractUpdatable<Long> {
     private String email;
 
     @Column(name = "student_level")
-    private Integer studentLevel; // TODO could be enum or separate entity
+    private StudentLevel studentLevel;
 
     @Column(name = "student_creation_date")
     private Date creationDate; // TODO check spring's feature to manage creation and update dates (auditing)

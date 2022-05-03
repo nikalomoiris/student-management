@@ -1,6 +1,7 @@
 package com.nkalomoiris.studentmanagement.dto.student;
 
 import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
+import com.nkalomoiris.studentmanagement.model.StudentLevel;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,11 +14,11 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
 
     protected Integer studentAge;
 
-    protected Integer studentLevel;
+    protected String studentLevel;
 
     private final Date creationDate;
 
-    public StudentResponseDto(String firstName, String lastName, String email, Long id, StudentsGroupDto group, Integer studentAge, Integer studentLevel,
+    public StudentResponseDto(String firstName, String lastName, String email, Long id, StudentsGroupDto group, Integer studentAge, StudentLevel studentLevel,
                               Date creationDate) {
         this.id = id;
         this.firstName = firstName;
@@ -25,7 +26,7 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
         this.email = email;
         this.group = group;
         this.studentAge = studentAge;
-        this.studentLevel = studentLevel;
+        this.studentLevel = studentLevel.toString();
         this.creationDate = creationDate;
     }
 
@@ -41,7 +42,7 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
         return studentAge;
     }
 
-    public Integer getStudentLevel() {
+    public String getStudentLevel() {
         return studentLevel;
     }
 
