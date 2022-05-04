@@ -1,5 +1,8 @@
 package com.nkalomoiris.studentmanagement.dto.student;
 
+import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
+import com.nkalomoiris.studentmanagement.model.StudentLevel;
+
 public abstract class AbstractStudentDto {
 
     protected String firstName;

@@ -2,6 +2,7 @@ package com.nkalomoiris.studentmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.nkalomoiris.studentmanagement.dto.student.GroupsStudentDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

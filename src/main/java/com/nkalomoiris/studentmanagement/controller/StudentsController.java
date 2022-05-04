@@ -2,7 +2,9 @@ package com.nkalomoiris.studentmanagement.controller;
 
 import com.nkalomoiris.studentmanagement.dto.student.StudentResponseDto;
 import com.nkalomoiris.studentmanagement.model.Student;
-import com.nkalomoiris.studentmanagement.repository.StudentRepository;
+import com.nkalomoiris.studentmanagement.service.StudentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +16,23 @@ import java.util.List;
 @RequestMapping("/api/v1/students")
 public class StudentsController {
 
-    private final StudentRepository studentRepository;
+    Logger logger = LoggerFactory.getLogger(StudentsController.class);
+
+    private final StudentService studentService;
 
     private final ConversionService conversionService;
 
     @Autowired
-    public StudentsController(StudentRepository studentRepository, ConversionService conversionService) {
-        this.studentRepository = studentRepository;
+    public StudentsController(StudentService studentService, ConversionService conversionService) {
+        this.studentService = studentService;
         this.conversionService = conversionService;
     }
 
+    // TODO use dto and dao for requests and responds
     @GetMapping
     public List<StudentResponseDto> getAll() {
 
-        List<Student> students = studentRepository.findAll();
+        List<Student> students = studentService.findAll();
 
         List<StudentResponseDto> results = new ArrayList<>(students.size());
 
@@ -39,18 +44,18 @@ public class StudentsController {
     @GetMapping
     @RequestMapping("{student_id}")
     public StudentResponseDto getById(@PathVariable Long student_id) {
-        return convert(studentRepository.getById(student_id));
+        return convert(studentService.getById(student_id));
     }
 
     // TODO use this method for update too
     @PostMapping
     public StudentResponseDto create(@RequestBody Student student) {
-        return convert(studentRepository.save(student));
+        return convert(studentService.create(student));
     }
 
     @RequestMapping(value = "{student_id}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable Long student_id) {
-        studentRepository.deleteById(student_id);
+        studentService.deleteById(student_id);
     }
 
     private StudentResponseDto convert(Student student) {

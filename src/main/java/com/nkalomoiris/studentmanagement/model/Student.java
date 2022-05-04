@@ -1,5 +1,6 @@
 package com.nkalomoiris.studentmanagement.model;
 
+import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
