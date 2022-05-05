@@ -1,7 +1,6 @@
 package com.nkalomoiris.studentmanagement.dto.student;
 
 import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
-import com.nkalomoiris.studentmanagement.model.StudentLevel;
 
 public abstract class AbstractStudentDto {
 
@@ -10,6 +9,14 @@ public abstract class AbstractStudentDto {
     protected String lastName;
 
     protected String email;
+
+    protected StudentsGroupDto group;
+
+    protected Integer studentAge;
+
+    protected String studentLevel;
+
+    protected String ssn;
 
     public String getFirstName() {
         return firstName;
@@ -33,6 +40,30 @@ public abstract class AbstractStudentDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public StudentsGroupDto getGroup() {
+        return group;
+    }
+
+    public void setGroup(StudentsGroupDto group) {
+        this.group = group;
+    }
+
+    public Integer getStudentAge() {
+        return studentAge;
+    }
+
+    public void setStudentAge(Integer studentAge) {
+        this.studentAge = studentAge;
+    }
+
+    public String getStudentLevel() {
+        return studentLevel;
+    }
+
+    public void setStudentLevel(String studentLevel) {
+        this.studentLevel = studentLevel;
     }
 
 }

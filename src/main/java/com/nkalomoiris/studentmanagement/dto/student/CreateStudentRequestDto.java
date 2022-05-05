@@ -1,4 +1,4 @@
 package com.nkalomoiris.studentmanagement.dto.student;
 
-public class CreateStudentRequestDto extends AbstractStudentDto{
+public class CreateStudentRequestDto extends AbstractCreateStudentDto{
 }

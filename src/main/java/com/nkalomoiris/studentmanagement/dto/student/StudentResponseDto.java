@@ -10,12 +10,6 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
 
     private final Long id;
 
-    protected StudentsGroupDto group;
-
-    protected Integer studentAge;
-
-    protected String studentLevel;
-
     private final Date creationDate;
 
     public StudentResponseDto(String firstName, String lastName, String email, Long id, StudentsGroupDto group, Integer studentAge, StudentLevel studentLevel,
@@ -36,18 +30,6 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
 
     public Date getCreationDate() {
         return creationDate;
-    }
-
-    public Integer getStudentAge() {
-        return studentAge;
-    }
-
-    public String getStudentLevel() {
-        return studentLevel;
-    }
-
-    public StudentsGroupDto getGroup() {
-        return group;
     }
 
     @Override

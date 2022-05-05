@@ -30,4 +30,8 @@ public class Group extends AbstractUpdatable<Long> {
     @JsonIgnore
     private List<Student> students;
 
+    public Group(Long id) {
+        this.id = id;
+    }
+
 }

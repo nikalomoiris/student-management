@@ -1,5 +1,6 @@
 package com.nkalomoiris.studentmanagement.controller;
 
+import com.nkalomoiris.studentmanagement.dto.student.CreateStudentRequestDto;
 import com.nkalomoiris.studentmanagement.dto.student.StudentResponseDto;
 import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.service.StudentService;
@@ -28,7 +29,6 @@ public class StudentsController {
         this.conversionService = conversionService;
     }
 
-    // TODO use dto and dao for requests and responds
     @GetMapping
     public List<StudentResponseDto> getAll() {
 
@@ -49,8 +49,8 @@ public class StudentsController {
 
     // TODO use this method for update too
     @PostMapping
-    public StudentResponseDto create(@RequestBody Student student) {
-        return convert(studentService.create(student));
+    public StudentResponseDto create(@RequestBody CreateStudentRequestDto createStudentRequestDto) {
+        return convert(studentService.create(createStudentRequestDto));
     }
 
     @RequestMapping(value = "{student_id}", method = RequestMethod.DELETE)
