@@ -1,5 +1,7 @@
 package com.nkalomoiris.studentmanagement.controller;
 
+import com.nkalomoiris.studentmanagement.dto.group.AbstractCreateGroupDto;
+import com.nkalomoiris.studentmanagement.dto.group.AbstractGroupDto;
 import com.nkalomoiris.studentmanagement.dto.group.CreateGroupRequestDto;
 import com.nkalomoiris.studentmanagement.dto.group.GroupResponseDto;
 import com.nkalomoiris.studentmanagement.model.Group;
@@ -48,8 +50,8 @@ public class GroupsController {
     }
 
     @PostMapping
-    public GroupResponseDto create(@RequestBody Group group) {
-        return convert(groupService.create(group));
+    public GroupResponseDto create(@RequestBody CreateGroupRequestDto createGroupRequestDto) {
+        return convert(groupService.create(createGroupRequestDto));
     }
 
     @RequestMapping(value = "{group_id}", method = RequestMethod.DELETE)

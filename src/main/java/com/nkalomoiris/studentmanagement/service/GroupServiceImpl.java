@@ -1,6 +1,7 @@
 package com.nkalomoiris.studentmanagement.service;
 
 import com.nkalomoiris.studentmanagement.dao.GroupDao;
+import com.nkalomoiris.studentmanagement.dto.group.AbstractCreateGroupDto;
 import com.nkalomoiris.studentmanagement.dto.group.AbstractGroupDto;
 import com.nkalomoiris.studentmanagement.dto.group.CreateGroupRequestDto;
 import com.nkalomoiris.studentmanagement.model.Group;
@@ -30,8 +31,9 @@ public class GroupServiceImpl implements GroupService{
     }
 
     @Override
-    public Group create(Group group) {
-        return groupDao.save(group);
+    public Group create(AbstractGroupDto abstractGroupDto) {
+        Group newGroup = new Group();
+        return groupDao.save(copy(abstractGroupDto, newGroup));
     }
 
     @Override

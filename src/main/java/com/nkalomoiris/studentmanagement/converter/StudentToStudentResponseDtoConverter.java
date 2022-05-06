@@ -17,6 +17,7 @@ public class StudentToStudentResponseDtoConverter implements Converter<Student, 
     public StudentResponseDto convert(Student source) {
 
         logger.info("Converting Student to StudentResponseDto");
+        logger.info(source.toString());
 
         var studentsGroupResponseDto = new StudentsGroupDto(source.getGroup().getId(), source.getGroup().getName());
 

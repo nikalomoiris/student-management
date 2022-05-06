@@ -56,4 +56,19 @@ public class Student extends AbstractUpdatable<Long> {
         this.creationDate = new java.util.Date(); // TODO this will be removed when spring's auditing is utilized
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", ssn='" + ssn + '\'' +
+            ", studentAge=" + studentAge +
+            ", email='" + email + '\'' +
+            ", studentLevel=" + studentLevel +
+            ", creationDate=" + creationDate +
+            ", groupId=" + group.getId() +
+            ", groupName=" + group.getName() +
+            '}';
+    }
 }

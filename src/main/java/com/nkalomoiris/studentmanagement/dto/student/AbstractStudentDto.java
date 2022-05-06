@@ -10,13 +10,9 @@ public abstract class AbstractStudentDto {
 
     protected String email;
 
-    protected StudentsGroupDto group;
-
     protected Integer studentAge;
 
     protected String studentLevel;
-
-    protected String ssn;
 
     public String getFirstName() {
         return firstName;
@@ -42,14 +38,6 @@ public abstract class AbstractStudentDto {
         this.email = email;
     }
 
-    public StudentsGroupDto getGroup() {
-        return group;
-    }
-
-    public void setGroup(StudentsGroupDto group) {
-        this.group = group;
-    }
-
     public Integer getStudentAge() {
         return studentAge;
     }
@@ -65,5 +53,4 @@ public abstract class AbstractStudentDto {
     public void setStudentLevel(String studentLevel) {
         this.studentLevel = studentLevel;
     }
-
 }

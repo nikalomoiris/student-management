@@ -34,6 +34,11 @@ public class StudentsController {
 
         List<Student> students = studentService.findAll();
 
+        for (Student s :
+            students) {
+            logger.info(s.toString());
+        }
+
         List<StudentResponseDto> results = new ArrayList<>(students.size());
 
         students.forEach(student -> results.add(convert(student)));

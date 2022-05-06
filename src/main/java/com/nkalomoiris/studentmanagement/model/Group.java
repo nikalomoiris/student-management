@@ -34,4 +34,12 @@ public class Group extends AbstractUpdatable<Long> {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Group{" +
+            "id=" + id +
+            ", Name='" + Name + '\'' +
+            ", students=" + students +
+            '}';
+    }
 }

@@ -12,6 +12,8 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
 
     private final Date creationDate;
 
+    private final StudentsGroupDto group;
+
     public StudentResponseDto(String firstName, String lastName, String email, Long id, StudentsGroupDto group, Integer studentAge, StudentLevel studentLevel,
                               Date creationDate) {
         this.id = id;
@@ -30,6 +32,10 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
 
     public Date getCreationDate() {
         return creationDate;
+    }
+
+    public StudentsGroupDto getGroup() {
+        return group;
     }
 
     @Override

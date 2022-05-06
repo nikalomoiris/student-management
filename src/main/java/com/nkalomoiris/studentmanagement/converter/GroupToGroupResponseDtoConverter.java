@@ -25,7 +25,9 @@ public class GroupToGroupResponseDtoConverter implements Converter<Group, GroupR
 
         if (!CollectionUtils.isEmpty(source.getStudents())) {
             source.getStudents().forEach(student ->
-                    convertedStudents.add(new GroupsStudentDto(student.getId(), student.getFirstName(), student.getLastName(), student.getEmail())));
+                    convertedStudents.add(new GroupsStudentDto(student.getId(), student.getFirstName(),
+                        student.getLastName(), student.getEmail(), student.getStudentAge(),
+                        student.getStudentLevel().name())));
         }
 
         return new GroupResponseDto(source.getId(), source.getName(), convertedStudents);
