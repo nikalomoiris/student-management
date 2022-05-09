@@ -4,18 +4,16 @@ import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class StudentResponseDto extends AbstractStudentDto implements Serializable {
 
     private final Long id;
 
-    private final Date creationDate;
-
     private final StudentsGroupDto group;
 
-    public StudentResponseDto(String firstName, String lastName, String email, Long id, StudentsGroupDto group, Integer studentAge, StudentLevel studentLevel,
-                              Date creationDate) {
+    public StudentResponseDto(String firstName, String lastName, String email, Long id, StudentsGroupDto group,
+                              Integer studentAge, StudentLevel studentLevel) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,15 +21,10 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
         this.group = group;
         this.studentAge = studentAge;
         this.studentLevel = studentLevel.toString();
-        this.creationDate = creationDate;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
     }
 
     public StudentsGroupDto getGroup() {
@@ -45,13 +38,11 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
                         ", firstName=%s" +
                         ", lastName=%s" +
                         ", email=%s" +
-                        ", creationDate=%s" +
                         ", studentAge=%s" +
                         ", studentLevel=%s" +
                         ", group=%s" +
                         "}",
-                id, firstName, lastName, email,
-                creationDate, studentAge, studentLevel, group
+                id, firstName, lastName, email, studentAge, studentLevel, group
         );
     }
 }

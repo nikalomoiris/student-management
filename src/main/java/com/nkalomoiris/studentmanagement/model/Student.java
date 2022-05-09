@@ -3,14 +3,23 @@ package com.nkalomoiris.studentmanagement.model;
 import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name = "students")
+@EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Student extends AbstractUpdatable<Long> {
@@ -45,16 +54,25 @@ public class Student extends AbstractUpdatable<Long> {
     @Column(name = "student_level")
     private StudentLevel studentLevel;
 
+    @CreatedDate
     @Column(name = "student_creation_date")
-    private Date creationDate; // TODO check spring's feature to manage creation and update dates (auditing)
+    private LocalDateTime creationDate;
+
+    @LastModifiedDate
+    @Column(name = "student_last_update_date")
+    private LocalDateTime modifiedDate;
+
+    @CreatedBy
+    @Column(name = "student_created_by")
+    private String createdBy;
+
+    @LastModifiedBy
+    @Column(name = "student_modified_by")
+    private String modifiedBy;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
-
-    public Student() {
-        this.creationDate = new java.util.Date(); // TODO this will be removed when spring's auditing is utilized
-    }
 
     @Override
     public String toString() {
@@ -67,6 +85,7 @@ public class Student extends AbstractUpdatable<Long> {
             ", email='" + email + '\'' +
             ", studentLevel=" + studentLevel +
             ", creationDate=" + creationDate +
+            ", modifiedDate=" + modifiedDate +
             ", groupId=" + group.getId() +
             ", groupName=" + group.getName() +
             '}';
