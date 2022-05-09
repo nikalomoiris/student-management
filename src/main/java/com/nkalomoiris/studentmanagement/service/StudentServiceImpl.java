@@ -2,10 +2,7 @@ package com.nkalomoiris.studentmanagement.service;
 
 import com.nkalomoiris.studentmanagement.dao.StudentDao;
 import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
-import com.nkalomoiris.studentmanagement.dto.student.AbstractCreateStudentDto;
-import com.nkalomoiris.studentmanagement.dto.student.AbstractStudentDto;
-import com.nkalomoiris.studentmanagement.dto.student.CreateStudentRequestDto;
-import com.nkalomoiris.studentmanagement.dto.student.StudentResponseDto;
+import com.nkalomoiris.studentmanagement.dto.student.*;
 import com.nkalomoiris.studentmanagement.model.Group;
 import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
@@ -40,6 +37,12 @@ public class StudentServiceImpl implements StudentService{
     public Student create(CreateStudentRequestDto createStudentRequestDto) {
         Student newStudent = new Student();
         return studentDao.save(copy(createStudentRequestDto, newStudent));
+    }
+
+    @Override
+    public Student update(UpdateStudentRequestDto updateStudentRequestDto) {
+        var student = studentDao.getById(updateStudentRequestDto.getId());
+        return studentDao.save(copy(updateStudentRequestDto, student));
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.nkalomoiris.studentmanagement.controller;
 
 import com.nkalomoiris.studentmanagement.dto.student.CreateStudentRequestDto;
 import com.nkalomoiris.studentmanagement.dto.student.StudentResponseDto;
+import com.nkalomoiris.studentmanagement.dto.student.UpdateStudentRequestDto;
 import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.service.StudentService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,10 +54,14 @@ public class StudentsController {
         return convert(studentService.getById(student_id));
     }
 
-    // TODO use this method for update too
     @PostMapping
     public StudentResponseDto create(@RequestBody CreateStudentRequestDto createStudentRequestDto) {
         return convert(studentService.create(createStudentRequestDto));
+    }
+
+    @PutMapping
+    public StudentResponseDto update(@RequestBody UpdateStudentRequestDto updateStudentRequestDto) {
+        return convert(studentService.update(updateStudentRequestDto));
     }
 
     @RequestMapping(value = "{student_id}", method = RequestMethod.DELETE)
