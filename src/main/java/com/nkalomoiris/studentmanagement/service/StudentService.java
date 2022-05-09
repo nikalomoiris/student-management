@@ -2,7 +2,6 @@ package com.nkalomoiris.studentmanagement.service;
 
 
 import com.nkalomoiris.studentmanagement.dto.student.CreateStudentRequestDto;
-import com.nkalomoiris.studentmanagement.dto.student.StudentResponseDto;
 import com.nkalomoiris.studentmanagement.dto.student.UpdateStudentRequestDto;
 import com.nkalomoiris.studentmanagement.model.Student;
 

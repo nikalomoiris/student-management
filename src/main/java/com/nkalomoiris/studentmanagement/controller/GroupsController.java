@@ -1,8 +1,8 @@
 package com.nkalomoiris.studentmanagement.controller;
 
-import com.nkalomoiris.studentmanagement.dto.group.*;
-import com.nkalomoiris.studentmanagement.dto.student.StudentResponseDto;
-import com.nkalomoiris.studentmanagement.dto.student.UpdateStudentRequestDto;
+import com.nkalomoiris.studentmanagement.dto.group.CreateGroupRequestDto;
+import com.nkalomoiris.studentmanagement.dto.group.GroupResponseDto;
+import com.nkalomoiris.studentmanagement.dto.group.UpdateGroupRequestDto;
 import com.nkalomoiris.studentmanagement.model.Group;
 import com.nkalomoiris.studentmanagement.service.GroupService;
 import org.slf4j.Logger;

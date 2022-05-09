@@ -4,7 +4,6 @@ import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public class StudentResponseDto extends AbstractStudentDto implements Serializable {
 

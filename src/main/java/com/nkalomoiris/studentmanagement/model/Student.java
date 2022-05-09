@@ -1,6 +1,5 @@
 package com.nkalomoiris.studentmanagement.model;
 
-import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity(name = "students")
 @EntityListeners(AuditingEntityListener.class)

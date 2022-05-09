@@ -8,6 +8,7 @@ import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,23 +30,27 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
+    @Transactional
     public Student getById(Long id) {
         return studentDao.getById(id);
     }
 
     @Override
+    @Transactional
     public Student create(CreateStudentRequestDto createStudentRequestDto) {
         Student newStudent = new Student();
         return studentDao.save(copy(createStudentRequestDto, newStudent));
     }
 
     @Override
+    @Transactional
     public Student update(UpdateStudentRequestDto updateStudentRequestDto) {
         var student = studentDao.getById(updateStudentRequestDto.getId());
         return studentDao.save(copy(updateStudentRequestDto, student));
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         studentDao.deleteById(id);
     }
