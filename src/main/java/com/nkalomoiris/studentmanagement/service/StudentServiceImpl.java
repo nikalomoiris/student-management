@@ -1,5 +1,6 @@
 package com.nkalomoiris.studentmanagement.service;
 
+import com.nkalomoiris.studentmanagement.dao.GroupDao;
 import com.nkalomoiris.studentmanagement.dao.StudentDao;
 import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import com.nkalomoiris.studentmanagement.dto.student.AbstractCreateStudentDto;
@@ -8,9 +9,12 @@ import com.nkalomoiris.studentmanagement.dto.student.UpdateStudentRequestDto;
 import com.nkalomoiris.studentmanagement.model.Group;
 import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -19,12 +23,18 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService{
 
+    @Value("${application.global-constants.group-max-size:5}")
+    private Integer GROUP_MAX_SIZE;
+
     private final StudentDao studentDao;
+
+    private final GroupDao groupDao;
 
     private final ConversionService conversionService;
 
-    public StudentServiceImpl(StudentDao studentDao, ConversionService conversionService) {
+    public StudentServiceImpl(StudentDao studentDao, GroupDao groupDao, ConversionService conversionService) {
         this.studentDao = studentDao;
+        this.groupDao = groupDao;
         this.conversionService = conversionService;
     }
 
@@ -42,6 +52,11 @@ public class StudentServiceImpl implements StudentService{
     @Override
     @Transactional
     public Student create(CreateStudentRequestDto createStudentRequestDto) {
+        if(groupIsFull(createStudentRequestDto.getGroup().getId())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Specified group is full"
+            );
+        }
         Student newStudent = new Student();
         return studentDao.save(copy(createStudentRequestDto, newStudent));
     }
@@ -50,6 +65,13 @@ public class StudentServiceImpl implements StudentService{
     @Transactional
     public Student update(UpdateStudentRequestDto updateStudentRequestDto) {
         var student = studentDao.getById(updateStudentRequestDto.getId());
+        if(student.getGroup().getId() != updateStudentRequestDto.getGroup().getId()) {
+            if (groupIsFull(updateStudentRequestDto.getGroup().getId())) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Specified group is full"
+                );
+            }
+        }
         return studentDao.save(copy(updateStudentRequestDto, student));
     }
 
@@ -63,13 +85,21 @@ public class StudentServiceImpl implements StudentService{
         student.setFirstName(source.getFirstName());
         student.setLastName(source.getLastName());
         student.setEmail(source.getEmail());
-        student.setStudentAge((int) ChronoUnit.YEARS.between(source.getDob(), LocalDateTime.now()));
+        student.setStudentAge(calculateAgeInYears(source.getDob()));
         student.setStudentLevel(StudentLevel.valueOf(source.getStudentLevel()));
         StudentsGroupDto studentsGroupDto = source.getGroup();
         student.setGroup(new Group(studentsGroupDto.getId()));
         student.setSsn(source.getSsn());
         student.setDob(source.getDob());
         return student;
+    }
+
+    private int calculateAgeInYears(LocalDateTime dob) {
+        return (int) ChronoUnit.YEARS.between(dob, LocalDateTime.now());
+    }
+
+    private boolean groupIsFull(Long groupId) {
+        return groupDao.getById(groupId).getStudents().size() >= GROUP_MAX_SIZE;
     }
 
 }
