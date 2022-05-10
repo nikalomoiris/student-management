@@ -2,7 +2,9 @@ package com.nkalomoiris.studentmanagement.service;
 
 import com.nkalomoiris.studentmanagement.dao.StudentDao;
 import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
-import com.nkalomoiris.studentmanagement.dto.student.*;
+import com.nkalomoiris.studentmanagement.dto.student.AbstractCreateStudentDto;
+import com.nkalomoiris.studentmanagement.dto.student.CreateStudentRequestDto;
+import com.nkalomoiris.studentmanagement.dto.student.UpdateStudentRequestDto;
 import com.nkalomoiris.studentmanagement.model.Group;
 import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
@@ -10,6 +12,8 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -59,11 +63,12 @@ public class StudentServiceImpl implements StudentService{
         student.setFirstName(source.getFirstName());
         student.setLastName(source.getLastName());
         student.setEmail(source.getEmail());
-        student.setStudentAge(source.getStudentAge());
+        student.setStudentAge((int) ChronoUnit.YEARS.between(source.getDob(), LocalDateTime.now()));
         student.setStudentLevel(StudentLevel.valueOf(source.getStudentLevel()));
         StudentsGroupDto studentsGroupDto = source.getGroup();
         student.setGroup(new Group(studentsGroupDto.getId()));
         student.setSsn(source.getSsn());
+        student.setDob(source.getDob());
         return student;
     }
 

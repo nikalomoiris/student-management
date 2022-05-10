@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -45,20 +43,15 @@ public class Student extends AbstractUpdatable<Long> {
     @Max(100)
     private Integer studentAge;
 
+    @Column(name = "student_dob")
+    private LocalDateTime dob;
+
     @Column(name = "student_email")
     @Email
     private String email;
 
     @Column(name = "student_level")
     private StudentLevel studentLevel;
-
-    @CreatedDate
-    @Column(name = "student_creation_date")
-    private LocalDateTime creationDate;
-
-    @LastModifiedDate
-    @Column(name = "student_last_update_date")
-    private LocalDateTime modifiedDate;
 
     @CreatedBy
     @Column(name = "student_created_by")
@@ -82,8 +75,6 @@ public class Student extends AbstractUpdatable<Long> {
             ", studentAge=" + studentAge +
             ", email='" + email + '\'' +
             ", studentLevel=" + studentLevel +
-            ", creationDate=" + creationDate +
-            ", modifiedDate=" + modifiedDate +
             ", groupId=" + group.getId() +
             ", groupName=" + group.getName() +
             '}';

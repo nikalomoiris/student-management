@@ -4,6 +4,7 @@ import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class StudentResponseDto extends AbstractStudentDto implements Serializable {
 
@@ -11,8 +12,10 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
 
     private final StudentsGroupDto group;
 
+    private final Integer studentAge;
+
     public StudentResponseDto(String firstName, String lastName, String email, Long id, StudentsGroupDto group,
-                              Integer studentAge, StudentLevel studentLevel) {
+                              Integer studentAge, StudentLevel studentLevel, LocalDateTime dob) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +23,7 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
         this.group = group;
         this.studentAge = studentAge;
         this.studentLevel = studentLevel.toString();
+        this.dob = dob;
     }
 
     public Long getId() {
@@ -30,18 +34,21 @@ public class StudentResponseDto extends AbstractStudentDto implements Serializab
         return group;
     }
 
+    public Integer getStudentAge() {
+        return studentAge;
+    }
+
     @Override
     public String toString() {
-        return String.format("StudentDto{" +
-                        "id=%s" +
-                        ", firstName=%s" +
-                        ", lastName=%s" +
-                        ", email=%s" +
-                        ", studentAge=%s" +
-                        ", studentLevel=%s" +
-                        ", group=%s" +
-                        "}",
-                id, firstName, lastName, email, studentAge, studentLevel, group
-        );
+        return "StudentResponseDto{" +
+                "id=" + id +
+                ", group=" + group +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", studentAge=" + studentAge +
+                ", studentLevel='" + studentLevel + '\'' +
+                ", dob=" + dob +
+                '}';
     }
 }

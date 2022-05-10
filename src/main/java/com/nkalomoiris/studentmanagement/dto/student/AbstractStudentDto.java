@@ -1,5 +1,7 @@
 package com.nkalomoiris.studentmanagement.dto.student;
 
+import java.time.LocalDateTime;
+
 public abstract class AbstractStudentDto {
 
     protected String firstName;
@@ -8,9 +10,9 @@ public abstract class AbstractStudentDto {
 
     protected String email;
 
-    protected Integer studentAge;
-
     protected String studentLevel;
+
+    protected LocalDateTime dob;
 
     public String getFirstName() {
         return firstName;
@@ -36,19 +38,19 @@ public abstract class AbstractStudentDto {
         this.email = email;
     }
 
-    public Integer getStudentAge() {
-        return studentAge;
-    }
-
-    public void setStudentAge(Integer studentAge) {
-        this.studentAge = studentAge;
-    }
-
     public String getStudentLevel() {
         return studentLevel;
     }
 
     public void setStudentLevel(String studentLevel) {
         this.studentLevel = studentLevel;
+    }
+
+    public LocalDateTime getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDateTime dob) {
+        this.dob = dob;
     }
 }
