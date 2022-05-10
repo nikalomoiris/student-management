@@ -9,8 +9,11 @@ public class GroupResponseDto extends AbstractGroupDto{
     private final Long id;
     private final List<GroupsStudentDto> students;
 
-    public GroupResponseDto(Long id, String name, List<GroupsStudentDto> students) {
+    private final Integer size;
+
+    public GroupResponseDto(Long id, String name, List<GroupsStudentDto> students, Integer size) {
         this.id = id;
+        this.size = size;
         this.name = name;
         this.students = students;
     }
@@ -23,14 +26,16 @@ public class GroupResponseDto extends AbstractGroupDto{
         return students;
     }
 
+    public Integer getSize() {
+        return size;
+    }
+
     @Override
     public String toString() {
-        return String.format("GroupResponseDto{" +
-                        "id=%s" +
-                        ", \nname=%s" +
-                        ", \nstudents=%s" +
-                        "}",
-                id, name, students
-        );
+        return "GroupResponseDto{" +
+                "id=" + id +
+                ", students=" + students +
+                ", size=" + size +
+                '}';
     }
 }
