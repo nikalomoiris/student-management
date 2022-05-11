@@ -22,43 +22,43 @@ public class Student extends AbstractUpdatable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "student_first_name", nullable = false)
+    @Column(name = "first_name", nullable = false)
     @NotNull(message = "First name is mandatory")
     private String firstName;
 
-    @Column(name = "student_last_name", nullable = false)
+    @Column(name = "last_name", nullable = false)
     @NotNull(message = "Last name is mandatory")
     private String lastName;
 
-    @Column(name = "student_ssn", unique = true, nullable = false)
+    @Column(name = "ssn", unique = true, nullable = false)
     @NotNull(message = "SSN is mandatory")
     @Size(min = 10, max = 10)
     private String ssn;
 
-    @Column(name = "student_age")
+    @Column(name = "age")
     @Min(5)
     @Max(100)
     private Integer studentAge;
 
-    @Column(name = "student_dob")
+    @Column(name = "dob")
     private LocalDateTime dob;
 
-    @Column(name = "student_email")
+    @Column(name = "email")
     @Email
     private String email;
 
-    @Column(name = "student_level")
+    @Column(name = "level")
     private StudentLevel studentLevel;
 
     @CreatedBy
-    @Column(name = "student_created_by")
+    @Column(name = "created_by")
     private String createdBy;
 
     @LastModifiedBy
-    @Column(name = "student_modified_by")
+    @Column(name = "modified_by")
     private String modifiedBy;
 
     @ManyToOne

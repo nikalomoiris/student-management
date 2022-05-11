@@ -30,6 +30,7 @@ public class GroupToGroupResponseDtoConverter implements Converter<Group, GroupR
                         student.getStudentLevel().name(), student.getDob())));
         }
 
-        return new GroupResponseDto(source.getId(), source.getName(), convertedStudents, source.getStudents().size());
+        return new GroupResponseDto(source.getId(), source.getName(), convertedStudents,
+            source.getStudents() != null ? source.getStudents().size() : null);
     }
 }

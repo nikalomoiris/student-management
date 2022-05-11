@@ -25,19 +25,18 @@ public class Group extends AbstractUpdatable<Long> {
     @Column(name = "group_id")
     private Long id;
 
-    @Column(name = "group_name")
+    @Column(name = "name")
     private String Name;
 
     @OneToMany(mappedBy = "group")
-    @JsonIgnore
     private List<Student> students;
 
     @CreatedBy
-    @Column(name = "group_created_by")
+    @Column(name = "created_by")
     private String createdBy;
 
     @LastModifiedBy
-    @Column(name = "group_modified_by")
+    @Column(name = "modified_by")
     private String modifiedBy;
 
     public Group(Long id) {

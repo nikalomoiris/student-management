@@ -9,26 +9,26 @@ import java.time.Instant;
 @MappedSuperclass
 public abstract class AbstractUpdatable<T> extends AbstractPersistable<T> {
 
-    @Column(name = "updated_at")
-    protected Instant updatedAt;
+    @Column(name = "modified_at")
+    protected Instant modifiedAt;
 
-    public Instant getUpdatedAt() {
-        return updatedAt;
+    public Instant getModifieddAt() {
+        return modifiedAt;
     }
 
-    void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
+    void setModifieddAt(Instant modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     @PrePersist
     public void onPrePersist() {
         super.onPrePersist();
-        updatedAt = createdAt;
+        modifiedAt = createdAt;
     }
 
     @PreUpdate
     public void onPreUpdate() {
         // Inject clock instance
-        updatedAt = Instant.now();
+        modifiedAt = Instant.now();
     }
 }
