@@ -1,7 +1,5 @@
 package com.nkalomoiris.studentmanagement.service;
 
-import com.nkalomoiris.studentmanagement.dao.GroupDao;
-import com.nkalomoiris.studentmanagement.dao.StudentDao;
 import com.nkalomoiris.studentmanagement.dto.group.StudentsGroupDto;
 import com.nkalomoiris.studentmanagement.dto.student.AbstractCreateStudentDto;
 import com.nkalomoiris.studentmanagement.dto.student.CreateStudentRequestDto;
@@ -9,6 +7,8 @@ import com.nkalomoiris.studentmanagement.dto.student.UpdateStudentRequestDto;
 import com.nkalomoiris.studentmanagement.model.Group;
 import com.nkalomoiris.studentmanagement.model.Student;
 import com.nkalomoiris.studentmanagement.model.StudentLevel;
+import com.nkalomoiris.studentmanagement.repository.GroupRepository;
+import com.nkalomoiris.studentmanagement.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
@@ -26,27 +26,27 @@ public class StudentServiceImpl implements StudentService{
     @Value("${application.global-constants.group-max-size:5}")
     private Integer GROUP_MAX_SIZE;
 
-    private final StudentDao studentDao;
+    private final StudentRepository studentRepository;
 
-    private final GroupDao groupDao;
+    private final GroupRepository groupRepository;
 
     private final ConversionService conversionService;
 
-    public StudentServiceImpl(StudentDao studentDao, GroupDao groupDao, ConversionService conversionService) {
-        this.studentDao = studentDao;
-        this.groupDao = groupDao;
+    public StudentServiceImpl(StudentRepository studentRepository, GroupRepository groupRepository, ConversionService conversionService) {
+        this.studentRepository = studentRepository;
+        this.groupRepository = groupRepository;
         this.conversionService = conversionService;
     }
 
     @Override
     public List<Student> findAll() {
-        return studentDao.findAll();
+        return studentRepository.findAll();
     }
 
     @Override
     @Transactional
     public Student getById(Long id) {
-        return studentDao.getById(id);
+        return studentRepository.getById(id);
     }
 
     @Override
@@ -58,13 +58,13 @@ public class StudentServiceImpl implements StudentService{
             );
         }
         Student newStudent = new Student();
-        return studentDao.save(copy(createStudentRequestDto, newStudent));
+        return studentRepository.save(copy(createStudentRequestDto, newStudent));
     }
 
     @Override
     @Transactional
     public Student update(UpdateStudentRequestDto updateStudentRequestDto) {
-        var student = studentDao.getById(updateStudentRequestDto.getId());
+        var student = studentRepository.getById(updateStudentRequestDto.getId());
         if(student.getGroup().getId() != updateStudentRequestDto.getGroup().getId()) {
             if (groupIsFull(updateStudentRequestDto.getGroup().getId())) {
                 throw new ResponseStatusException(
@@ -72,13 +72,13 @@ public class StudentServiceImpl implements StudentService{
                 );
             }
         }
-        return studentDao.save(copy(updateStudentRequestDto, student));
+        return studentRepository.save(copy(updateStudentRequestDto, student));
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        studentDao.deleteById(id);
+        studentRepository.deleteById(id);
     }
 
     private <T extends AbstractCreateStudentDto> Student copy(T source, Student student) {
@@ -99,7 +99,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     private boolean groupIsFull(Long groupId) {
-        return groupDao.getById(groupId).getStudents().size() >= GROUP_MAX_SIZE;
+        return groupRepository.getById(groupId).getStudents().size() >= GROUP_MAX_SIZE;
     }
 
 }
