@@ -5,20 +5,32 @@ import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class StudentSpecification {
-    public Specification<Student> getStudentQuery(Integer domainId, Calendar startDate, Calendar endDate, Integer gameId, Integer drawId) {
+    public Specification<Student> getStudentQuery(StudentFilter studentFilter) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            predicates.add(criteriaBuilder.equal(root.get("domainId"), domainId));
-            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createdAt"), startDate));
-            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("createdAt"), endDate));
+            if (studentFilter != null && studentFilter.getFirstName() != null) {
+                predicates.add(criteriaBuilder.like(root.get("firstName"), "%" + studentFilter.getFirstName() + "%"));
+            }
 
-            if (gameId != null) {
-                predicates.add(criteriaBuilder.equal(root.get("gameId"), gameId));
+            if (studentFilter != null && studentFilter.getLastName() != null) {
+                predicates.add(criteriaBuilder.like(root.get("lastName"), "%" + studentFilter.getLastName() + "%"));
+            }
+
+            if (studentFilter != null && studentFilter.getSsn() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("ssn"), "%" + studentFilter.getSsn() + "%"));
+            }
+
+            if (studentFilter != null && studentFilter.getEmail() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("email"), "%" + studentFilter.getEmail() + "%"));
+            }
+
+            if (studentFilter != null && studentFilter.getStudentAge() != null) {
+                predicates.add(criteriaBuilder
+                        .greaterThanOrEqualTo(root.get("studentAge"), "%" + studentFilter.getStudentAge() + "%"));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

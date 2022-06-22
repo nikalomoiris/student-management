@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public class StudentsController {
     }
 
     @GetMapping
-    public List<StudentResponseDto> getAll() {
+    public List<StudentResponseDto> getAll(@RequestParam Specification<Student> studentSpecification) {
 
-        List<Student> students = studentService.findAll();
+        List<Student> students = studentService.findAll(studentSpecification);
 
         for (Student s :
             students) {

@@ -11,6 +11,7 @@ import com.nkalomoiris.studentmanagement.repository.GroupRepository;
 import com.nkalomoiris.studentmanagement.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,8 +40,8 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public List<Student> findAll() {
-        return studentRepository.findAll();
+    public List<Student> findAll(Specification<Student> studentSpecification) {
+        return studentRepository.findAll(studentSpecification);
     }
 
     @Override
