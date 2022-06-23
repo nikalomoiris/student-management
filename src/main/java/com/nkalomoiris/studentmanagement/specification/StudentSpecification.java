@@ -21,16 +21,16 @@ public class StudentSpecification {
             }
 
             if (studentFilter != null && studentFilter.getSsn() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("ssn"), "%" + studentFilter.getSsn() + "%"));
+                predicates.add(criteriaBuilder.equal(root.get("ssn"), studentFilter.getSsn()));
             }
 
             if (studentFilter != null && studentFilter.getEmail() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("email"), "%" + studentFilter.getEmail() + "%"));
+                predicates.add(criteriaBuilder.equal(root.get("email"), studentFilter.getEmail()));
             }
 
             if (studentFilter != null && studentFilter.getStudentAge() != null) {
                 predicates.add(criteriaBuilder
-                        .greaterThanOrEqualTo(root.get("studentAge"), "%" + studentFilter.getStudentAge() + "%"));
+                        .greaterThanOrEqualTo(root.get("studentAge"), studentFilter.getStudentAge()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
