@@ -32,7 +32,10 @@
 				"SonarSource.sonarlint-vscode",
 				"vscjava.vscode-spring-boot-dashboard",
 				"redhat.java",
-				"rangav.vscode-thunder-client"
+				"rangav.vscode-thunder-client",
+				"eamodio.gitlens",
+				"streetsidesoftware.code-spell-checker",
+				"christian-kohler.path-intellisense"
 			]
 		}
 	},
