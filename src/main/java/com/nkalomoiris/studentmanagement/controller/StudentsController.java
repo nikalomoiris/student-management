@@ -51,11 +51,6 @@ public class StudentsController {
 
         List<Student> students = studentService.findAll(studentSpecification);
 
-        for (Student s :
-            students) {
-            logger.info(s.toString());
-        }
-
         List<StudentResponseDto> results = new ArrayList<>(students.size());
 
         students.forEach(student -> results.add(convert(student)));
@@ -79,7 +74,7 @@ public class StudentsController {
         return convert(studentService.update(updateStudentRequestDto));
     }
 
-    @RequestMapping(value = "{student_id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "{student_id}")
     public void deleteById(@PathVariable Long student_id) {
         studentService.deleteById(student_id);
     }

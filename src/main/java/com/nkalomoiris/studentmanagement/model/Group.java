@@ -1,6 +1,5 @@
 package com.nkalomoiris.studentmanagement.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +25,7 @@ public class Group extends AbstractUpdatable<Long> {
     private Long id;
 
     @Column(name = "name")
-    private String Name;
+    private String name;
 
     @OneToMany(mappedBy = "group")
     private List<Student> students;
@@ -47,7 +46,7 @@ public class Group extends AbstractUpdatable<Long> {
     public String toString() {
         return "Group{" +
                 "id=" + id +
-                ", Name='" + Name + '\'' +
+                ", name='" + name + '\'' +
                 ", students=" + students +
                 ", createdBy='" + createdBy + '\'' +
                 ", modifiedBy='" + modifiedBy + '\'' +

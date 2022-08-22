@@ -10,7 +10,6 @@ import com.nkalomoiris.studentmanagement.model.StudentLevel;
 import com.nkalomoiris.studentmanagement.repository.GroupRepository;
 import com.nkalomoiris.studentmanagement.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,18 +24,15 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService{
 
     @Value("${application.global-constants.group-max-size:5}")
-    private Integer GROUP_MAX_SIZE;
+    private Integer groupMaxSize;
 
     private final StudentRepository studentRepository;
 
     private final GroupRepository groupRepository;
 
-    private final ConversionService conversionService;
-
-    public StudentServiceImpl(StudentRepository studentRepository, GroupRepository groupRepository, ConversionService conversionService) {
+    public StudentServiceImpl(StudentRepository studentRepository, GroupRepository groupRepository) {
         this.studentRepository = studentRepository;
         this.groupRepository = groupRepository;
-        this.conversionService = conversionService;
     }
 
     @Override
@@ -66,12 +62,11 @@ public class StudentServiceImpl implements StudentService{
     @Transactional
     public Student update(UpdateStudentRequestDto updateStudentRequestDto) {
         var student = studentRepository.getById(updateStudentRequestDto.getId());
-        if(student.getGroup().getId() != updateStudentRequestDto.getGroup().getId()) {
-            if (groupIsFull(updateStudentRequestDto.getGroup().getId())) {
-                throw new ResponseStatusException(
-                        HttpStatus.BAD_REQUEST, "Specified group is full"
-                );
-            }
+        if(student.getGroup().getId().equals(updateStudentRequestDto.getGroup().getId())
+            && groupIsFull(updateStudentRequestDto.getGroup().getId())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Specified group is full"
+            );
         }
         return studentRepository.save(copy(updateStudentRequestDto, student));
     }
@@ -100,7 +95,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     private boolean groupIsFull(Long groupId) {
-        return groupRepository.getById(groupId).getStudents().size() >= GROUP_MAX_SIZE;
+        return groupRepository.getById(groupId).getStudents().size() >= groupMaxSize;
     }
 
 }
