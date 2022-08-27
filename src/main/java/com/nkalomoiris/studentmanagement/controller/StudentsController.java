@@ -58,8 +58,7 @@ public class StudentsController {
         return results;
     }
 
-    @GetMapping
-    @RequestMapping("{student_id}")
+    @GetMapping("{student_id}")
     public StudentResponseDto getById(@PathVariable Long student_id) {
         return convert(studentService.getById(student_id));
     }

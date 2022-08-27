@@ -3,7 +3,7 @@ server:
 
 logging:
   level:
-    root: info
+    root: 
 
 management:
   endpoints:
@@ -22,9 +22,14 @@ spring:
     password: Welcome
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL82Dialect
-    hibernate:
-      ddl-auto: update
-      show-sql: true
+    # hibernate:
+    #   ddl-auto: update
+    properties:
+      hibernate:
+        show-sql: true
+        sql-format: true
+        ddl-auto: update
+        generate-statistics: true
 
 application:
   global-constants:

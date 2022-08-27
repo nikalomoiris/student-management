@@ -27,9 +27,16 @@
     "method": "GET",
     "sortNum": 20000,
     "created": "2022-08-22T13:12:48.603Z",
-    "modified": "2022-08-22T13:12:53.770Z",
+    "modified": "2022-08-27T13:09:06.765Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "admin",
+        "password": "password"
+      }
+    },
     "tests": []
   },
   {
